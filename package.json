@@ -1,0 +1,28 @@
+{
+  "name": "turn-orbicular",
+  "version": "0.1.0",
+  "description": "Turn fork of orbicular repo",
+  "main": "dist/turn-orbicular.js",
+  "scripts": {
+    "test": "grunt test --verbose"
+  },
+  "author": "Ryan Chen <ryan.chen@turn.com>",
+  "license": "Apache2",
+  "repository": "git://stash.turn.com:7999/cnsl/turn-orbicular.git",
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "express": "~4.7.2",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-coffee": "^0.10.1",
+    "grunt-contrib-concat": "^0.4.0",
+    "grunt-contrib-jasmine": "^0.5.2",
+    "grunt-contrib-jshint": "~0.4.0",
+    "grunt-contrib-sass": "^0.7.3",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-express-server": "~0.4.17",
+    "grunt-coveralls": "^0.3.0",
+    "grunt-html2js": "^0.2.7",
+    "grunt-ngmin": "0.0.3",
+    "grunt-template-jasmine-istanbul": "^0.2.6"
+  }
+}

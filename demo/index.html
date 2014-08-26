@@ -1,0 +1,60 @@
+<!doctype html>
+<html ng-app="demo">
+<head>
+
+	<meta charset="utf-8">
+
+	<title>turn-orbicular demo</title>
+
+	<link rel="stylesheet" href="../dist/turn-orbicular.css">
+
+	<style>
+
+		/* ... */
+
+	</style>
+
+</head>
+<body ng-controller="mainCtrl">
+	
+	<div class="turn-orbicular outer"
+        ng-controller="mainCtrl">
+        <turn-orbicular 
+            total="totalProgress" 
+            progression="currentProgress"
+            resize="true">
+
+            <div class="turn-orbicular inner"
+                ng-controller="mainCtrl">
+                <turn-orbicular 
+                    total="totalProgress" 
+                    progression="currentProgress"
+                    resize="true">
+                    Some content for the circle
+                </turn-orbicular>
+            </div>
+
+            Some content for the circle
+        </turn-orbicular>
+    </div>
+
+	<script src="../bower_components/angular/angular.js"></script>
+	<script src="../dist/turn-orbicular.js"></script>
+	<script>
+
+		angular
+		.module('demo', ['turn/turnOrbicular'])
+		.controller('mainCtrl', function ($scope) {
+
+			angular.extend($scope, {
+
+                currentProgress: Math.random(),
+                totalProgress: 1
+
+            });
+			
+		});
+
+	</script>
+</body>
+</html>
