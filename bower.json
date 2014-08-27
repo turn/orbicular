@@ -1,6 +1,6 @@
 {
 	"name": "turn-orbicular",
-	"version": "3.0.2",
+	"version": "3.0.3",
 	"description": "Turn fork of orbicular repo",
 	"main": "dist/turn-orbicular.js",
 	"authors": [
