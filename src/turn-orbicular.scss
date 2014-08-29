@@ -1,19 +1,2 @@
 @import "orbicular";
 @include orbicular;
-
-.turn-orbicular {
-
-    
-    
-    &.outer {
-        width: 300px;
-        height: 300px;
-    }
-
-    &.inner {
-        width: 252px;
-        height: 252px;
-    }
-    
-    
-}
