@@ -2,7 +2,7 @@
   "name": "turn-orbicular",
   "version": "3.0.4",
   "description": "Turn fork of orbicular repo",
-  "main": "dist/turn-orbicular.js",
+  "main": "src/turn-orbicular.js",
   "scripts": {
     "test": "grunt test --verbose"
   },
