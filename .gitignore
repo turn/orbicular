@@ -1,6 +1,8 @@
+bower_components
 node_modules
-.tmp
-.sass-cache
-app/bower_components
-*.DS_Store
+_SpecRunner.html
+Gruntfile.js
+dist
+build
+.*
 *.log

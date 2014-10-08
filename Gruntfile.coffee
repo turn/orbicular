@@ -12,14 +12,17 @@ module.exports = (grunt) ->
 		'grunt-coveralls'
 		'grunt-html2js'
 		'grunt-ngmin'
+		'grunt-browserify'
+		'grunt-contrib-uglify'
+		'grunt-contrib-cssmin'
 	]
 	.forEach grunt.loadNpmTasks
 
 	# task sets
-	build = ['html2js', 'ngmin', 'jshint', 'concat', 'sass', 'clean']
-	test = ['html2js', 'coffee', 'jasmine:unit']
-	testAndBuild = ['html2js', 'coffee', 'jasmine:unit', 'ngmin', 'jshint', 'concat', 'sass', 'clean']
-	run = ['default', 'express:dev', 'watch']
+	build = ['clean:pre', 'test', 'sass:dev', 'clean:post']
+	test = ['html2js', 'browserify', 'coffee:unit', 'jasmine:unit']
+	run = ['build', 'express:dev', 'watch']
+	release = ['build', 'uglify', 'cssmin']
 
 	# task defs
 	grunt.initConfig
@@ -27,19 +30,15 @@ module.exports = (grunt) ->
 		pkg: grunt.file.readJSON 'package.json'
 
 		clean:
-			main: [
-				'./dist/template.js'
+			pre: [
+				'build'
 			]
+			post: []
 
 		coffee:
-			compile:
+			unit:
 				files:
 					'test/unit.js': 'test/unit.coffee'
-
-		concat:
-			main:
-				src: ['./dist/*.js']
-				dest: './dist/turn-orbicular.js'
 
 		coveralls:
 			options:
@@ -50,7 +49,7 @@ module.exports = (grunt) ->
 		html2js:
 			main:
 				src: './src/html/*.html'
-				dest: './dist/template.js'
+				dest: './src/template-build.js'
 			options:
 				base: './src/html'
 				module: 'turnOrbicularTemplate'
@@ -58,7 +57,7 @@ module.exports = (grunt) ->
 		jasmine:
 			coverage:
 				src: [
-					'./src/turn-orbicular.js'
+					'./build/turn-orbicular.js'
 				]
 				options:
 					specs: ['./test/unit.js']
@@ -79,18 +78,16 @@ module.exports = (grunt) ->
 						]
 					type: 'lcovonly'
 					vendor: [
-						'./bower_components/angular/angular.js'
-						'./bower_components/angular-mocks/angular-mocks.js'
-						'./dist/template.js'
+						'./node_modules/angular/lib/angular.js'
+						'./node_modules/angular-mocks/angular-mocks.js'
 					]
 			unit:
-				src: './src/turn-orbicular.js'
+				src: './build/turn-orbicular.js'
 				options:
 					specs: './test/unit.js'
 					vendor: [
-						'./bower_components/angular/angular.js'
-						'./bower_components/angular-mocks/angular-mocks.js'
-						'./dist/template.js'
+						'./node_modules/angular/lib/angular.js'
+						'./node_modules/angular-mocks/angular-mocks.js'
 					]
 					keepRunner: true
 
@@ -100,9 +97,23 @@ module.exports = (grunt) ->
 				dest: './dist/turn-orbicular.js'
 
 		sass:
-			main:
+			options:
+				loadPath: ['node_modules', 'bower_components']
+			dev:
 				files:
-					'dist/turn-orbicular.css': 'src/turn-orbicular.scss'
+					'build/turn-orbicular.css': 'src/turn-orbicular.scss'
+
+		# autoprefixer:
+		# 	options: 
+		# 		browsers: [
+		# 			'Explorer >= 9',
+		# 			'last 5 Chrome versions'
+		# 			'last 5 Firefox versions'
+		# 		]
+		# 		cascade: true
+		# 	main:
+		# 		src: 'build/turn-orbicular.css'
+		# 		dest: 'build/turn-orbicular.css'
 
 		jshint:
 			main:
@@ -115,14 +126,28 @@ module.exports = (grunt) ->
 				files:
 					src: ['src/*.js']
 
+		browserify:
+			dev:
+				options:
+					transform: ['browserify-ngannotate']
+				files:
+					'build/turn-orbicular.js': 'src/turn-orbicular.js'
+
+		uglify:
+			release:
+				files:
+					'dist/turn-orbicular.js': 'build/turn-orbicular.js'
+
+
 		watch:
 			main:
 				files: [
-					'./src/**/*'
+					'src/**/*'
 					'./bower_components/*'
 					'./node_modules/*'
+					'!src/template-build.js'
 				]
-				tasks: testAndBuild
+				tasks: build
 				options:
 					interrupt: true
 					spawn: false
@@ -145,5 +170,7 @@ module.exports = (grunt) ->
 					script: 'server.js'
 
 	grunt.registerTask 'default', build
+	grunt.registerTask 'build', build
 	grunt.registerTask 'test', test
 	grunt.registerTask 'run', run
+	grunt.registerTask 'release', release
