@@ -22,8 +22,15 @@
  * 4. Add demo html
  */
 
+// Initialize components
+// Make sure every components only use at most one time
+// to fit in 'angular way'.
+var angular = window.angular || require('angular');
 
-angular
+// Make sure turn/turnSlider library is not re-loading.
+require('./template-build');
+
+module.exports = angular
 .module('turn/turnOrbicular', ['turnOrbicularTemplate'])
 .value('turnOrbicularOptions', {
 
