@@ -78,16 +78,16 @@ module.exports = (grunt) ->
 						]
 					type: 'lcovonly'
 					vendor: [
-						'./node_modules/angular/lib/angular.js'
-						'./node_modules/angular-mocks/angular-mocks.js'
+						'./bower_components/angular/angular.js'
+						'./bower_components/angular-mocks/angular-mocks.js'
 					]
 			unit:
 				src: './build/turn-orbicular.js'
 				options:
 					specs: './test/unit.js'
 					vendor: [
-						'./node_modules/angular/lib/angular.js'
-						'./node_modules/angular-mocks/angular-mocks.js'
+						'./bower_components/angular/angular.js'
+						'./bower_components/angular-mocks/angular-mocks.js'
 					]
 					keepRunner: true
 
@@ -104,7 +104,7 @@ module.exports = (grunt) ->
 					'build/turn-orbicular.css': 'src/turn-orbicular.scss'
 
 		# autoprefixer:
-		# 	options: 
+		# 	options:
 		# 		browsers: [
 		# 			'Explorer >= 9',
 		# 			'last 5 Chrome versions'
@@ -163,7 +163,7 @@ module.exports = (grunt) ->
 				options:
 					interrupt: true
 					spawn: false
-		
+
 		express:
 			dev:
 				options:

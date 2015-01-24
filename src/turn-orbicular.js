@@ -1,13 +1,13 @@
 /**
 *    CoTag Orbicular
 *    A more or less pure CSS, circular, progress bar
-*    
+*
 *   Copyright (c) 2014 CoTag Media.
-*    
+*
 *    @author     Stephen von Takach <steve@cotag.me>
 *    @copyright  2014 cotag.me
-* 
-*     
+*
+*
 *     References:
 *        * http://fromanegg.com/post/41302147556/100-pure-css-radial-progress-bar
 *        * https://medium.com/@andsens/radial-progress-indicator-using-css-a917b80c43f9
@@ -22,11 +22,6 @@
  * 4. Add demo html
  */
 
-// Initialize components
-// Make sure every components only use at most one time
-// to fit in 'angular way'.
-var angular = window.angular || require('angular');
-
 // Make sure turn/turnSlider library is not re-loading.
 require('./template-build');
 
@@ -35,7 +30,7 @@ module.exports = angular
 .value('turnOrbicularOptions', {
 
 	// ...
-	
+
 })
 .directive('turnOrbicular', ['$window', function (windowRef) {
 

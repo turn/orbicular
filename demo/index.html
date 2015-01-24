@@ -16,18 +16,18 @@
 
 </head>
 <body ng-controller="mainCtrl">
-	
+
 	<div class="turn-orbicular outer"
         ng-controller="mainCtrl">
-        <turn-orbicular 
-            total="totalProgress" 
+        <turn-orbicular
+            total="totalProgress"
             progression="currentProgress"
             resize="true">
 
             <div class="turn-orbicular inner"
                 ng-controller="mainCtrl">
-                <turn-orbicular 
-                    total="totalProgress" 
+                <turn-orbicular
+                    total="totalProgress"
                     progression="currentProgress"
                     resize="true">
                     Some content for the circle
@@ -38,6 +38,7 @@
         </turn-orbicular>
     </div>
 
+  <script src="../bower_components/angular/angular.js"></script>
 	<script src="../build/turn-orbicular.js"></script>
 	<script>
 
@@ -51,7 +52,7 @@
                 totalProgress: 1
 
             });
-			
+
 		});
 
 	</script>
