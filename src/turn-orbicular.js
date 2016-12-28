@@ -32,7 +32,7 @@ module.exports = angular
 	// ...
 
 })
-.directive('turnOrbicular', ['$window', function (windowRef) {
+.directive('turnOrbicular', ['$window', '$timeout', function (windowRef) {
 
     // Constants here reduce memory requirements of each circle
     var $window = angular.element(windowRef),
@@ -74,8 +74,11 @@ module.exports = angular
 
                 // Width must be an even number of pixels for the effect to work.
                 setWidth = function () {
-                    var width = element.prop('offsetWidth');
-                    element.css('font-size', width - (width % 2) + 'px');
+                    // Wait for DOM to load
+                    $timeout(function() {
+                        var width = element.prop('offsetWidth');
+                        element.css('font-size', width - (width % 2) + 'px');
+                    }, 0);
                 };
 
 
@@ -114,8 +117,11 @@ module.exports = angular
 
             // we watch for changes to the progress indicator of the parent scope
             scope.$watch('current', function (newValue) {
-                newValue = newValue / scope.total * 180.0;
-                updateProgress(circles, fix, newValue);
+                // Wait for DOM to load
+                $timeout(function() {
+                    newValue = newValue / scope.total * 180.0;
+                    updateProgress(circles, fix, newValue);
+                }, 0);
             });
 
         }
