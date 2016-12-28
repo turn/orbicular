@@ -32,7 +32,7 @@ module.exports = angular
 	// ...
 
 })
-.directive('turnOrbicular', ['$window', '$timeout', function (windowRef) {
+.directive('turnOrbicular', ['$window', '$timeout', function (windowRef, $timeout) {
 
     // Constants here reduce memory requirements of each circle
     var $window = angular.element(windowRef),
